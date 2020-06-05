@@ -1,19 +1,29 @@
+const buttons = [];
+
 let ship;
+let leftButton;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	angleMode(DEGREES);
 	ship = new Ship(width/2, height/2, 10);
+	leftButton = new Button(createVector(0.05*width, 0.90*height), 20, () => ship.steer(-5));
 }
 
 function draw() {
 	background(0);
 	ship.update(deltaTime / 1000);
 	ship.display();
+	leftButton.display();
 	refresh();
 }
 
 function refresh() {
+	if(keyIsPressed) keyPress();
+	if(mouseIsPressed) mousePress();
+}
+
+function keyPress() {
 	let force = createVector(0, 0);
 	if(keyIsDown(LEFT_ARROW)) {
 		ship.steer(-5);
@@ -29,4 +39,11 @@ function refresh() {
 		force.mult(1000);
 	}
 	ship.applyForce(force);
+}
+
+function mousePress() {
+	buttons.forEach(button => {
+		if(button.isClicked(mouseX, mouseY))
+			button.execute();
+	});
 }
