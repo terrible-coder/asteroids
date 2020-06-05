@@ -6,6 +6,7 @@ let leftButton;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	angleMode(DEGREES);
+	ellipseMode(RADIUS);
 	ship = new Ship(width/2, height/2, 10);
 	leftButton = new Button(createVector(0.05*width, 0.90*height), 20, 40, thisArg => {
 		thisArg.color = 160;

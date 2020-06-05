@@ -22,7 +22,7 @@ class Button {
 
 	display() {
 		fill(this.color);
-		ellipse(this.pos.x, this.pos.y, 2*this.radius);
+		ellipse(this.pos.x, this.pos.y, this.radius);
 		this.color = this._defaultColor;
 	}
 }
