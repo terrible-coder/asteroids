@@ -8,7 +8,7 @@ function setup() {
 
 function draw() {
 	background(0);
-	ship.update(deltaTime);
+	ship.update(deltaTime / 1000);
 	ship.display();
 	refresh();
 }
@@ -22,11 +22,11 @@ function refresh() {
 	} else if(keyIsDown(UP_ARROW)) {
 		force = createVector(0, -1);
 		force.rotate(ship.heading);
-		force.mult(0.1);
+		force.mult(1000);
 	} else if(keyIsDown(DOWN_ARROW)) {
 		force = createVector(0, 1);
 		force.rotate(ship.heading);
-		force.mult(0.1);
+		force.mult(1000);
 	}
 	ship.applyForce(force);
 }
