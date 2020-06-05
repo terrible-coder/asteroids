@@ -1,13 +1,15 @@
+const defaultColor = 40;
 class Button {
 	constructor(pos, radius, callback) {
 		this.pos = pos;
 		this.radius = radius;
 		this.onclick = callback;
+		this.color = defaultColor;
 		buttons.push(this);
 	}
 
 	execute() {
-		this.onclick();
+		this.onclick(this);
 	}
 
 	isClicked(clickX, clickY) {
@@ -19,7 +21,8 @@ class Button {
 	}
 
 	display() {
-		fill(40);
+		fill(this.color);
 		ellipse(this.pos.x, this.pos.y, 2*this.radius);
+		this.color = defaultColor;
 	}
 }

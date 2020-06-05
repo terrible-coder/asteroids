@@ -7,7 +7,10 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	angleMode(DEGREES);
 	ship = new Ship(width/2, height/2, 10);
-	leftButton = new Button(createVector(0.05*width, 0.90*height), 20, () => ship.steer(-5));
+	leftButton = new Button(createVector(0.05*width, 0.90*height), 20, thisArg => {
+		thisArg.color = 160;
+		ship.steer(-5);
+	});
 }
 
 function draw() {
