@@ -1,10 +1,10 @@
-const defaultColor = 40;
 class Button {
-	constructor(pos, radius, callback) {
+	constructor(pos, radius, color, callback) {
 		this.pos = pos;
 		this.radius = radius;
 		this.onclick = callback;
-		this.color = defaultColor;
+		this._defaultColor = color;
+		this.color = color;
 		buttons.push(this);
 	}
 
@@ -23,6 +23,6 @@ class Button {
 	display() {
 		fill(this.color);
 		ellipse(this.pos.x, this.pos.y, 2*this.radius);
-		this.color = defaultColor;
+		this.color = this._defaultColor;
 	}
 }
