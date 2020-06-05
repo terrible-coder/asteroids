@@ -4,6 +4,7 @@ class Ship {
 		this.vel = createVector(0, 0);
 		this.acc = createVector(0, 0);
 		this.radius = radius;
+		this.heading = 0;
 	}
 
 	update(dt) {
@@ -12,6 +13,10 @@ class Ship {
 		this.pos.add(ds);
 		this.vel.add(dv);
 		this.acc.mult(0);
+	}
+
+	steer(angle) {
+		this.heading += angle;
 	}
 
 	applyForce(force) {
@@ -23,7 +28,7 @@ class Ship {
 		noFill();
 		push();
 		translate(this.pos.x, this.pos.y);
-		rotate(this.vel.heading());
+		rotate(this.heading);
 		beginShape();
 		vertex(0, 0);
 		vertex(-this.radius * cos(30), this.radius/2);
