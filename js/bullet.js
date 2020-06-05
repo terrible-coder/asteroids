@@ -1,9 +1,9 @@
 class Bullet {
 	constructor(pos, dir) {
 		this.pos = pos;
-		this.vel = createVector(100, 0);
+		this.vel = createVector(200, 0);
 		this.heading = dir;
-		this.life = 100;
+		this.life = 150;
 		this.vel.rotate(this.heading);
 	}
 
@@ -36,7 +36,7 @@ class Bullet {
 		push();
 		translate(this.pos.x, this.pos.y);
 		rotate(this.heading);
-		rect(0, 0, 1, 3);
+		rect(0, 0, 12, 2);
 		pop();
 	}
 }

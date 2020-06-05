@@ -6,6 +6,7 @@ class Ship {
 		this.bullets = [];
 		this.radius = radius;
 		this.heading = 0;
+		this.lastFired = 0;
 	}
 
 	update(dt) {
@@ -47,7 +48,10 @@ class Ship {
 	}
 
 	fire() {
+		if((frameCount - this.lastFired) < frameRate() / 4)
+			return;
 		this.bullets.push(new Bullet(this.pos.copy(), this.heading-90));
+		this.lastFired = frameCount;
 	}
 
 	display() {
