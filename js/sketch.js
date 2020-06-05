@@ -10,6 +10,7 @@ function setup() {
 	larger = width > height? width: height;smaller
 	angleMode(DEGREES);
 	ellipseMode(RADIUS);
+	rectMode(CENTER);
 	ship = new Ship(width/2, height/2, 10);
 	// left button
 	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {

@@ -3,6 +3,7 @@ class Ship {
 		this.pos = createVector(x, y);
 		this.vel = createVector(0, 0);
 		this.acc = createVector(0, 0);
+		this.bullets = [];
 		this.radius = radius;
 		this.heading = 0;
 	}
@@ -15,6 +16,7 @@ class Ship {
 		this.acc.mult(0);
 		this.wrap();
 		this.vel.mult(0.95);
+		this.bullets.forEach(b => b.update(dt));
 	}
 
 	wrap() {
@@ -38,10 +40,14 @@ class Ship {
 	}
 
 	fire() {
-		
+		for(let i = this.bullets.length - 1; i >= 0; i--)
+			if(!this.bullets[i].isAlive())
+				this.bullets.splice(i, 1);
+		this.bullets.push(new Bullet(this.pos.copy(), this.heading-90));
 	}
 
 	display() {
+		this.bullets.forEach(b => b.display());
 		stroke(255);
 		noFill();
 		push();
