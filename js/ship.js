@@ -37,6 +37,10 @@ class Ship {
 		this.acc.add(force);
 	}
 
+	fire() {
+		
+	}
+
 	display() {
 		stroke(255);
 		noFill();

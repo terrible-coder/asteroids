@@ -8,9 +8,36 @@ function setup() {
 	angleMode(DEGREES);
 	ellipseMode(RADIUS);
 	ship = new Ship(width/2, height/2, 10);
-	leftButton = new Button(createVector(0.05*width, 0.90*height), 20, 40, thisArg => {
+	// left button
+	new Button(createVector(0.125*width, 0.75*height), 0.06*width, 40, thisArg => {
 		thisArg.color = 160;
 		ship.steer(-5);
+	});
+	//right button
+	new Button(createVector(0.375*width, 0.75*height), 0.06*width, 40, thisArg => {
+		thisArg.color = 160;
+		ship.steer(5);
+	});
+	//up button
+	new Button(createVector(0.25*width, 0.625*height), 0.06*width, 40, thisArg => {
+		thisArg.color = 160;
+		const force = createVector(0, -1);
+		force.rotate(ship.heading);
+		force.mult(1000);
+		ship.applyForce(force);
+	})
+	//down button
+	new Button(createVector(0.25*width, 0.875*height), 0.06*width, 40, thisArg => {
+		thisArg.color = 160;
+		const force = createVector(0, 1);
+		force.rotate(ship.heading);
+		force.mult(1000);
+		ship.applyForce(force);
+	})
+	// fire button
+	new Button(createVector(0.875*width, 0.75*height), 0.10*height, 60, thisArg => {
+		thisArg.color = color(236, 238, 71);
+		ship.fire();
 	});
 }
 
@@ -18,7 +45,7 @@ function draw() {
 	background(0);
 	ship.update(deltaTime / 1000);
 	ship.display();
-	leftButton.display();
+	buttons.forEach(b => b.display());
 	refresh();
 }
 
