@@ -13,6 +13,8 @@ class Ship {
 		this.pos.add(ds);
 		this.vel.add(dv);
 		this.acc.mult(0);
+		this.pos.x = this.pos.x % width;
+		this.pos.y = this.pos.y % height;
 	}
 
 	steer(angle) {
