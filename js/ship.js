@@ -15,10 +15,12 @@ class Ship {
 		this.acc.mult(0);
 		this.pos.x = this.pos.x % width;
 		this.pos.y = this.pos.y % height;
+		this.vel.mult(0.95);
 	}
 
 	steer(angle) {
 		this.heading += angle;
+		this.vel.rotate(angle);
 	}
 
 	applyForce(force) {

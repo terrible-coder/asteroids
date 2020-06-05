@@ -23,12 +23,10 @@ function refresh() {
 		force = createVector(0, -1);
 		force.rotate(ship.heading);
 		force.mult(0.1);
+	} else if(keyIsDown(DOWN_ARROW)) {
+		force = createVector(0, 1);
+		force.rotate(ship.heading);
+		force.mult(0.1);
 	}
 	ship.applyForce(force);
-	if(ship.vel.magSq() > 0) {
-		const drag = ship.vel.copy();
-		drag.rotate(180);
-		// drag.normalize();
-		ship.applyForce(drag);
-	}
 }
