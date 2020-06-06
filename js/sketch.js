@@ -72,7 +72,8 @@ function keyPress() {
 		force = createVector(0, 1);
 		force.rotate(ship.heading);
 		force.mult(1000);
-	}
+	} else if(keyIsDown(32))
+		ship.fire();
 	ship.applyForce(force);
 }
 
