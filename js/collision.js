@@ -4,7 +4,9 @@ function detectCollisions() {
 			const obj_i = objects[i], obj_j = objects[j];
 			const smooth = obj_i.shape.vertices.length < obj_j.shape.vertices.length? obj_i: obj_j;
 			const rugged = obj_i.shape.vertices.length >= obj_j.shape.vertices.length? obj_i: obj_j;
-			const collided = smooth.shape.vertices.find(v => rugged.shape.isInside(v)) !== undefined;
+			const smooth_shape = smooth.actualShape;
+			const rugged_shape = rugged.actualShape;
+			const collided = smooth_shape.vertices.find(v => rugged_shape.isInside(v)) !== undefined;
 			if(collided) {
 				smooth.handleCollision(rugged);
 				rugged.handleCollision(smooth);

@@ -2,18 +2,26 @@ class Shape {
 	constructor(vertices, closed=true) {
 		this.vertices = vertices;
 		this.closed = closed;
-		this.extremes = {
+	}
+
+	static getExtremes(s) {
+		const extremes = {
 			xmin: width + 1,
 			xmax: -1,
 			ymin: height + 1,
 			ymax: -1
 		};
-		vertices.forEach(v => {
-			if(v.x < this.extremes.xmin) this.extremes.xmin = v.x;
-			if(v.x > this.extremes.xmax) this.extremes.xmax = v.x;
-			if(v.y < this.extremes.ymin) this.extremes.ymin = v.y;
-			if(v.y > this.extremes.ymax) this.extremes.ymax = v.y;
+		s.vertices.forEach(v => {
+			if(v.x < extremes.xmin) extremes.xmin = v.x;
+			if(v.x > extremes.xmax) extremes.xmax = v.x;
+			if(v.y < extremes.ymin) extremes.ymin = v.y;
+			if(v.y > extremes.ymax) extremes.ymax = v.y;
 		});
+		return extremes;
+	}
+
+	copy() {
+		return new Shape(this.vertices.map(v => v.copy()));
 	}
 
 	translate(origin) {
@@ -25,8 +33,9 @@ class Shape {
 	}
 
 	isInside(point) {
-		if((point.x < this.extremes.xmin || point.x > this.extremes.xmax) &&
-			(point.y < this.extremes.ymin || point.y > this.extremes.ymax))
+		const extremes = Shape.getExtremes(this);
+		if((point.x < extremes.xmin || point.x > extremes.xmax) &&
+			(point.y < extremes.ymin || point.y > extremes.ymax))
 			return false;
 		const nvert = this.vertices.length;
 		let i, j;

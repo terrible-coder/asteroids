@@ -17,6 +17,13 @@ class GameObject {
 		this.wrap();
 	}
 
+	get actualShape() {
+		const actual = this.shape.copy();
+		actual.translate(this.pos);
+		actual.rotate(this.vel.heading());
+		return actual;
+	}
+
 	wrap() {
 		if(this.pos.x > width)
 			this.pos.x = this.pos.x - width;

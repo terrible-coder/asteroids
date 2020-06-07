@@ -47,7 +47,7 @@ function setup() {
 		thisArg.color = color(236, 238, 71);
 		ship.fire();
 	});
-	frameRate(2);
+	// frameRate(2);
 }
 
 function draw() {

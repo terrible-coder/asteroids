@@ -6,7 +6,7 @@ const smooth = 2;
 
 class Asteroid extends GameObject {
 	constructor(pos, size) {
-		super(pos, p5.Vector.mult(p5.Vector.random2D(), 100), null);
+		super(pos, p5.Vector.mult(p5.Vector.random2D(), 0), null);
 		this.radius = size;
 		if(this.radius > largest) throw new Error("Too large asteroid.");
 		const ratio = (this.radius - smallest) / (largest - smallest);
