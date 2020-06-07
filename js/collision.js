@@ -24,3 +24,8 @@ function createLine(p1, p2) {
 		return coeffs.map(x => -x);
 	return coeffs;
 }
+
+function side(line, point) {
+	const [a, b, c] = line;
+	return a * point.x + b * point.y + c;
+}
