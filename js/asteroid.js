@@ -13,14 +13,15 @@ class Asteroid {
 		if(this.radius > largest) throw new Error("Too large asteroid.");
 		const ratio = (this.radius - smallest) / (largest - smallest);
 		const stops = lerp(smooth, ragged, ratio);
-		this.vertices = [];
+		const vertices = [];
 		for(let theta = 0; theta < 360; theta += 360/stops) {
 			const x = this.radius * cos(theta);
 			const y = this.radius * sin(theta);
 			const noiseX = this.radius * random(-0.2, 0.5);
 			const noiseY = this.radius * random(-0.2, 0.5);
-			this.vertices.push(createVector(x+noiseX, y+noiseY));
+			vertices.push(createVector(x+noiseX, y+noiseY));
 		}
+		this.shape = new Shape(vertices);
 		asteroids.push(this);
 	}
 
@@ -34,11 +35,7 @@ class Asteroid {
 		stroke(255);
 		push();
 		translate(this.pos.x, this.pos.y);
-		beginShape();
-		this.vertices.forEach(v => {
-			vertex(v.x, v.y);
-		});
-		endShape(CLOSE);
+		this.shape.display();
 		pop();
 	}
 }

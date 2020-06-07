@@ -3,9 +3,16 @@ class Ship {
 		this.pos = createVector(x, y);
 		this.vel = createVector(0, 0);
 		this.acc = createVector(0, 0);
+		const root3by2 = Math.sqrt(3) / 2;
+		this.shape = new Shape([
+			createVector(0, 0),
+			createVector(-radius / 2, -root3by2 * radius),
+			createVector(radius, 0),
+			createVector(-radius / 2, root3by2 * radius),
+		]);
 		this.bullets = [];
 		this.radius = radius;
-		this.heading = 0;
+		this.heading = -90;
 		this.lastFired = 0;
 	}
 
@@ -50,7 +57,7 @@ class Ship {
 	fire() {
 		if((frameCount - this.lastFired) < frameRate() / 4)
 			return;
-		this.bullets.push(new Bullet(this.pos.copy(), this.heading-90));
+		this.bullets.push(new Bullet(this.pos.copy(), this.heading));
 		this.lastFired = frameCount;
 	}
 
@@ -61,12 +68,7 @@ class Ship {
 		push();
 		translate(this.pos.x, this.pos.y);
 		rotate(this.heading);
-		beginShape();
-		vertex(0, 0);
-		vertex(-this.radius * cos(30), this.radius/2);
-		vertex(0, -this.radius);
-		vertex(this.radius * cos(30), this.radius/2);
-		endShape(CLOSE);
+		this.shape.display();
 		pop();
 	}
 }

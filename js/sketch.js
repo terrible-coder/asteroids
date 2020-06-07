@@ -28,7 +28,7 @@ function setup() {
 	//up button
 	new Button(createVector(0.25*width, 0.625*height), 0.06*smaller, 40, thisArg => {
 		thisArg.color = 160;
-		const force = createVector(0, -1);
+		const force = createVector(1, 0);
 		force.rotate(ship.heading);
 		force.mult(1000);
 		ship.applyForce(force);
@@ -36,7 +36,7 @@ function setup() {
 	//down button
 	new Button(createVector(0.25*width, 0.875*height), 0.06*smaller, 40, thisArg => {
 		thisArg.color = 160;
-		const force = createVector(0, 1);
+		const force = createVector(-1, 0);
 		force.rotate(ship.heading);
 		force.mult(1000);
 		ship.applyForce(force);
@@ -71,12 +71,12 @@ function keyPress() {
 	if(keyIsDown(RIGHT_ARROW))
 		ship.steer(5);
 	if(keyIsDown(UP_ARROW)) {
-		force = createVector(0, -1);
+		force = createVector(1, 0);
 		force.rotate(ship.heading);
 		force.mult(1000);
 	}
 	if(keyIsDown(DOWN_ARROW)) {
-		force = createVector(0, 1);
+		force = createVector(-1, 0);
 		force.rotate(ship.heading);
 		force.mult(1000);
 	}
