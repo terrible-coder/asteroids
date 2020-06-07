@@ -1,4 +1,5 @@
 const buttons = [];
+const asteroids = [];
 
 let ship;
 let leftButton;
@@ -12,6 +13,8 @@ function setup() {
 	ellipseMode(RADIUS);
 	rectMode(CENTER);
 	ship = new Ship(width/2, height/2, 10);
+	for(let i = 0; i < 10; i++)
+		new Asteroid(createVector(random(0, width), random(0, height)), random(smallest, largest));
 	// left button
 	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {
 		thisArg.color = 160;
@@ -47,8 +50,11 @@ function setup() {
 
 function draw() {
 	background(0);
-	ship.update(deltaTime / 1000);
+	const dt = deltaTime / 1000;
+	ship.update(dt);
+	asteroids.forEach(a => a.update(dt));
 	ship.display();
+	asteroids.forEach(a => a.display());
 	buttons.forEach(b => b.display());
 	refresh();
 }
