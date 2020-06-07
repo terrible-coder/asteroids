@@ -1,10 +1,14 @@
-class Bullet {
+class Bullet extends GameObject {
 	constructor(pos, dir) {
-		this.pos = pos;
-		this.vel = createVector(200, 0);
+		super(pos, createVector(200, 0).rotate(dir), null);
+		this.shape = new Shape([
+			createVector(-6, -1),
+			createVector(6, -1),
+			createVector(6, 1),
+			createVector(-6, 1)
+		]);
 		this.heading = dir;
 		this.life = 150;
-		this.vel.rotate(this.heading);
 	}
 
 	isAlive() {
@@ -14,20 +18,7 @@ class Bullet {
 	update(dt) {
 		this.life--;
 		if(this.life <= 0) return;
-		const ds = p5.Vector.mult(this.vel, dt);
-		this.pos.add(ds);
-		this.wrap();
-	}
-
-	wrap() {
-		if(this.pos.x > width)
-			this.pos.x = this.pos.x - width;
-		else if(this.pos.x < 0)
-			this.pos.x = this.pos.x + width;
-		if(this.pos.y > height)
-			this.pos.y = this.pos.y - height;
-		else if(this.pos.y < 0)
-			this.pos.y = this.pos.y + height;
+		super.update(dt);
 	}
 
 	display() {
@@ -36,7 +27,7 @@ class Bullet {
 		push();
 		translate(this.pos.x, this.pos.y);
 		rotate(this.heading);
-		rect(0, 0, 12, 2);
+		super.display();
 		pop();
 	}
 }

@@ -1,8 +1,6 @@
-class Ship {
+class Ship extends GameObject {
 	constructor(x, y, radius) {
-		this.pos = createVector(x, y);
-		this.vel = createVector(0, 0);
-		this.acc = createVector(0, 0);
+		super(createVector(x, y), createVector(0, 0), null);
 		const root3by2 = Math.sqrt(3) / 2;
 		this.shape = new Shape([
 			createVector(0, 0),
@@ -17,12 +15,7 @@ class Ship {
 	}
 
 	update(dt) {
-		const ds = p5.Vector.mult(this.vel, dt);
-		const dv = p5.Vector.mult(this.acc, dt);
-		this.pos.add(ds);
-		this.vel.add(dv);
-		this.acc.mult(0);
-		this.wrap();
+		super.update(dt);
 		this.vel.mult(0.95);
 		this.bullets.forEach(b => b.update(dt));
 		this.removeDeadBullets();
@@ -34,16 +27,16 @@ class Ship {
 				this.bullets.splice(i, 1);
 	}
 
-	wrap() {
-		if(this.pos.x > width)
-			this.pos.x = this.pos.x - width;
-		else if(this.pos.x < 0)
-			this.pos.x = this.pos.x + width;
-		if(this.pos.y > height)
-			this.pos.y = this.pos.y - height;
-		else if(this.pos.y < 0)
-			this.pos.y = this.pos.y + height;
-	}
+	// wrap() {
+	// 	if(this.pos.x > width)
+	// 		this.pos.x = this.pos.x - width;
+	// 	else if(this.pos.x < 0)
+	// 		this.pos.x = this.pos.x + width;
+	// 	if(this.pos.y > height)
+	// 		this.pos.y = this.pos.y - height;
+	// 	else if(this.pos.y < 0)
+	// 		this.pos.y = this.pos.y + height;
+	// }
 
 	steer(angle) {
 		this.heading += angle;
@@ -68,7 +61,7 @@ class Ship {
 		push();
 		translate(this.pos.x, this.pos.y);
 		rotate(this.heading);
-		this.shape.display();
+		super.display();
 		pop();
 	}
 }

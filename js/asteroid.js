@@ -4,11 +4,9 @@ const largest = 64;
 const ragged = 10;
 const smooth = 2;
 
-class Asteroid {
+class Asteroid extends GameObject {
 	constructor(pos, size) {
-		this.pos = pos;
-		this.vel = p5.Vector.random2D();
-		this.vel.mult(100);
+		super(pos, p5.Vector.mult(p5.Vector.random2D(), 100), null);
 		this.radius = size;
 		if(this.radius > largest) throw new Error("Too large asteroid.");
 		const ratio = (this.radius - smallest) / (largest - smallest);
@@ -25,17 +23,12 @@ class Asteroid {
 		asteroids.push(this);
 	}
 
-	update(dt) {
-		const ds = p5.Vector.mult(this.vel, dt);
-		this.pos.add(ds);
-	}
-
 	display() {
 		noFill();
 		stroke(255);
 		push();
 		translate(this.pos.x, this.pos.y);
-		this.shape.display();
+		super.display();
 		pop();
 	}
 }
