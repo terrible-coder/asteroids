@@ -66,19 +66,21 @@ function refresh() {
 
 function keyPress() {
 	let force = createVector(0, 0);
-	if(keyIsDown(LEFT_ARROW)) {
+	if(keyIsDown(LEFT_ARROW))
 		ship.steer(-5);
-	} else if(keyIsDown(RIGHT_ARROW)) {
+	if(keyIsDown(RIGHT_ARROW))
 		ship.steer(5);
-	} else if(keyIsDown(UP_ARROW)) {
+	if(keyIsDown(UP_ARROW)) {
 		force = createVector(0, -1);
 		force.rotate(ship.heading);
 		force.mult(1000);
-	} else if(keyIsDown(DOWN_ARROW)) {
+	}
+	if(keyIsDown(DOWN_ARROW)) {
 		force = createVector(0, 1);
 		force.rotate(ship.heading);
 		force.mult(1000);
-	} else if(keyIsDown(32))
+	}
+	if(keyIsDown(32))
 		ship.fire();
 	ship.applyForce(force);
 }
