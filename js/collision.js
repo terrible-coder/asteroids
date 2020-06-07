@@ -14,3 +14,13 @@ function detectCollisions() {
 		}
 	}
 }
+
+function createLine(p1, p2) {
+	const a = p2.y - p1.y;
+	const b = -(p2.x - p1.x);
+	const c = p2.x * p1.y - p1.x * p2.y;
+	const coeffs = [a, b, c];
+	if(a < 0)
+		return coeffs.map(x => -x);
+	return coeffs;
+}
