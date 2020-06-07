@@ -1,6 +1,8 @@
 class Ship extends GameObject {
 	constructor(x, y, radius) {
-		super(createVector(x, y), createVector(0, 0), null);
+		super(createVector(x, y), createVector(0, 0), (thisArg, other) => {
+			console.log("OW");
+		});
 		const root3by2 = Math.sqrt(3) / 2;
 		this.shape = new Shape([
 			createVector(0, 0),

@@ -5,6 +5,7 @@ class GameObject {
 		this.acc = createVector(0, 0);
 		this.shape = new Shape([]);
 		this.collisionHandler = callback;
+		objects.push(this);
 	}
 
 	update(dt) {
@@ -28,7 +29,8 @@ class GameObject {
 	}
 
 	handleCollision(other) {
-		this.collisionHandler(this, other);
+		if(this.collisionHandler !== null)
+			this.collisionHandler(this, other);
 	}
 
 	display() {

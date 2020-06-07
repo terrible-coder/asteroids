@@ -1,5 +1,6 @@
 const buttons = [];
 const asteroids = [];
+const objects = [];
 
 let ship;
 let leftButton;
@@ -13,7 +14,7 @@ function setup() {
 	ellipseMode(RADIUS);
 	rectMode(CENTER);
 	ship = new Ship(width/2, height/2, 10);
-	for(let i = 0; i < 10; i++)
+	for(let i = 0; i < 1; i++)
 		new Asteroid(createVector(random(0, width), random(0, height)), random(smallest, largest));
 	// left button
 	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {
@@ -46,6 +47,7 @@ function setup() {
 		thisArg.color = color(236, 238, 71);
 		ship.fire();
 	});
+	frameRate(2);
 }
 
 function draw() {
@@ -57,6 +59,7 @@ function draw() {
 	asteroids.forEach(a => a.display());
 	buttons.forEach(b => b.display());
 	refresh();
+	detectCollisions();
 }
 
 function refresh() {
