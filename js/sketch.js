@@ -14,7 +14,7 @@ function setup() {
 	ellipseMode(RADIUS);
 	rectMode(CENTER);
 	ship = new Ship(width/2, height/2, 10);
-	for(let i = 0; i < 1; i++)
+	for(let i = 0; i < 10; i++)
 		new Asteroid(createVector(random(0, width), random(0, height)), random(smallest, largest));
 	// left button
 	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {
