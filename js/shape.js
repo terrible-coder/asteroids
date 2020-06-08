@@ -28,8 +28,11 @@ class Shape {
 		this.vertices.forEach(v => v.add(origin));
 	}
 
-	rotate(theta) {
+	rotate(theta, point) {
+		point = point || createVector(0, 0);
+		this.translate(createVector(-point.x, -point.y));
 		this.vertices.forEach(v => v.rotate(theta));
+		this.translate(point);
 	}
 
 	isInside(point) {

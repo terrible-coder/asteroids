@@ -26,9 +26,9 @@ class Asteroid extends GameObject {
 	display() {
 		noFill();
 		stroke(255);
-		push();
-		translate(this.pos.x, this.pos.y);
+		// push();
+		// translate(this.pos.x, this.pos.y);
 		super.display();
-		pop();
+		// pop();
 	}
 }

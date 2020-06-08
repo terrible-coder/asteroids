@@ -3,6 +3,7 @@ class GameObject {
 		this.pos = pos;
 		this.vel = vel;
 		this.acc = createVector(0, 0);
+		this.heading = 0;
 		this.shape = new Shape([]);
 		this.collisionHandler = callback;
 		objects.push(this);
@@ -20,7 +21,7 @@ class GameObject {
 	get actualShape() {
 		const actual = this.shape.copy();
 		actual.translate(this.pos);
-		actual.rotate(this.vel.heading());
+		actual.rotate(this.heading, this.pos);
 		return actual;
 	}
 
@@ -41,6 +42,6 @@ class GameObject {
 	}
 
 	display() {
-		this.shape.display();
+		this.actualShape.display();
 	}
 }

@@ -60,10 +60,10 @@ class Ship extends GameObject {
 		this.bullets.forEach(b => b.display());
 		stroke(255);
 		noFill();
-		push();
-		translate(this.pos.x, this.pos.y);
-		rotate(this.heading);
+		// push();
+		// translate(this.pos.x, this.pos.y);
+		// rotate(this.heading);
 		super.display();
-		pop();
+		// pop();
 	}
 }

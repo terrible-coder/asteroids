@@ -24,10 +24,10 @@ class Bullet extends GameObject {
 	display() {
 		if(this.life <= 0) return;
 		fill(255);
-		push();
-		translate(this.pos.x, this.pos.y);
-		rotate(this.heading);
+		// push();
+		// translate(this.pos.x, this.pos.y);
+		// rotate(this.heading);
 		super.display();
-		pop();
+		// pop();
 	}
 }
