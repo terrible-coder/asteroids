@@ -1,6 +1,9 @@
 class Bullet extends GameObject {
 	constructor(pos, dir) {
-		super(pos, createVector(200, 0).rotate(dir), null);
+		super(pos, createVector(200, 0).rotate(dir), (thisArg, other) => {
+			if(other instanceof Asteroid)
+				other.split();
+		});
 		this.shape = new Shape([
 			createVector(-6, -1),
 			createVector(6, -1),
@@ -24,10 +27,6 @@ class Bullet extends GameObject {
 	display() {
 		if(this.life <= 0) return;
 		fill(255);
-		// push();
-		// translate(this.pos.x, this.pos.y);
-		// rotate(this.heading);
 		super.display();
-		// pop();
 	}
 }

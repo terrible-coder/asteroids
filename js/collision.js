@@ -78,6 +78,8 @@ function detectCollisions() {
 	for(let i = 0; i < objects.length; i++) {
 		for(let j = i+1; j < objects.length; j++) {
 			const obj_i = objects[i], obj_j = objects[j];
+			if(obj_i.collisionHandler == null && obj_j.collisionHandler == null)
+				continue;
 			const smooth = obj_i.shape.vertices.length < obj_j.shape.vertices.length? obj_i: obj_j;
 			const rugged = obj_i.shape.vertices.length >= obj_j.shape.vertices.length? obj_i: obj_j;
 			const collided = isCollinding(smooth, rugged);

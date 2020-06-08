@@ -1,7 +1,8 @@
 class Ship extends GameObject {
 	constructor(x, y, radius) {
 		super(createVector(x, y), createVector(0, 0), (thisArg, other) => {
-			console.log("OW");
+			if(other instanceof Asteroid)
+				noLoop();
 		});
 		const root3by2 = Math.sqrt(3) / 2;
 		this.shape = new Shape([
@@ -29,17 +30,6 @@ class Ship extends GameObject {
 				this.bullets.splice(i, 1);
 	}
 
-	// wrap() {
-	// 	if(this.pos.x > width)
-	// 		this.pos.x = this.pos.x - width;
-	// 	else if(this.pos.x < 0)
-	// 		this.pos.x = this.pos.x + width;
-	// 	if(this.pos.y > height)
-	// 		this.pos.y = this.pos.y - height;
-	// 	else if(this.pos.y < 0)
-	// 		this.pos.y = this.pos.y + height;
-	// }
-
 	steer(angle) {
 		this.heading += angle;
 		this.vel.rotate(angle);
@@ -60,10 +50,6 @@ class Ship extends GameObject {
 		this.bullets.forEach(b => b.display());
 		stroke(255);
 		noFill();
-		// push();
-		// translate(this.pos.x, this.pos.y);
-		// rotate(this.heading);
 		super.display();
-		// pop();
 	}
 }
