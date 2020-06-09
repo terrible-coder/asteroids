@@ -6,6 +6,26 @@ let ship;
 let leftButton;
 let smaller, larger;
 
+function spawnAsteroid() {
+	const side = random(["up", "down", "left", "right"]);
+	let pos;
+	switch(side) {
+	case "up":
+		pos = createVector(random(0, width), 0);
+		break;
+	case "down":
+		pos = createVector(random(0, width), height);
+		break;
+	case "left":
+		pos = createVector(0, random(height));
+		break;
+	case "right":
+		pos = createVector(width, random(height));
+		break;
+	}
+	new Asteroid(pos, random([smallest, 2 * smallest, 4 * smallest]));
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	smaller = width > height? height: width;
@@ -14,25 +34,8 @@ function setup() {
 	ellipseMode(RADIUS);
 	rectMode(CENTER);
 	ship = new Ship(width/2, height/2, 10);
-	for(let i = 0; i < 10; i++) {
-		const side = random(["up", "down", "left", "right"]);
-		let pos;
-		switch(side) {
-			case "up":
-				pos = createVector(random(0, width), 0);
-				break;
-			case "down":
-				pos = createVector(random(0, width), height);
-				break;
-			case "left":
-				pos = createVector(0, random(height));
-				break;
-			case "right":
-				pos = createVector(width, random(height));
-				break;
-		}
-		new Asteroid(pos, random(smallest, largest));
-	}
+	for(let i = 0; i < 6; i++)
+		spawnAsteroid();
 	// left button
 	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {
 		thisArg.color = 160;
@@ -77,6 +80,7 @@ function draw() {
 	buttons.forEach(b => b.display());
 	refresh();
 	detectCollisions();
+	if(asteroids.length < 4) spawnAsteroid();
 }
 
 function refresh() {

@@ -17,7 +17,7 @@ class Bullet extends GameObject {
 			createVector(-6, 1)
 		]);
 		this.heading = dir;
-		this.life = 150;
+		this.life = 100;
 	}
 
 	isAlive() {

@@ -40,6 +40,8 @@ class Ship extends GameObject {
 	}
 
 	fire() {
+		if(this.bullets.length >= 4)
+			return;
 		if((frameCount - this.lastFired) < frameRate() / 4)
 			return;
 		this.bullets.push(new Bullet(this.pos.copy(), this.heading));
