@@ -2,6 +2,12 @@ const buttons = [];
 const asteroids = [];
 const objects = [];
 
+const ASTEROID_SIZE = {
+	small: 8,
+	medium: 16,
+	large: 32
+}
+
 let ship;
 let leftButton;
 let smaller, larger;
@@ -23,7 +29,14 @@ function spawnAsteroid() {
 		pos = createVector(width, random(height));
 		break;
 	}
-	new Asteroid(pos, random([smallest, 2 * smallest, 4 * smallest]));
+	const sizeSelect = random(0, 4) | 0;
+	let size;
+	switch(sizeSelect) {
+	case 0: size = ASTEROID_SIZE.small; break;
+	case 1: size = ASTEROID_SIZE.medium; break;
+	case 2: size = ASTEROID_SIZE.large; break;
+	}
+	new Asteroid(pos, size);
 }
 
 function setup() {

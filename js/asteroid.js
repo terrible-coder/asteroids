@@ -1,6 +1,3 @@
-const smallest = 16;
-const largest = 64;
-
 const ragged = 15;
 const smooth = 10;
 
@@ -8,8 +5,8 @@ class Asteroid extends GameObject {
 	constructor(pos, size) {
 		super(pos, p5.Vector.mult(p5.Vector.random2D(), 100), null);
 		this.radius = size;
-		if(this.radius > largest) throw new Error("Too large asteroid.");
-		const ratio = (this.radius - smallest) / (largest - smallest);
+		if(this.radius > ASTEROID_SIZE.large) throw new Error("Too large asteroid.");
+		const ratio = (this.radius - ASTEROID_SIZE.small) / (ASTEROID_SIZE.large - ASTEROID_SIZE.small);
 		const stops = lerp(smooth, ragged, ratio);
 		const vertices = [];
 		for(let theta = 0; theta < 360; theta += 360/stops) {
@@ -24,11 +21,12 @@ class Asteroid extends GameObject {
 	}
 
 	split() {
-		if(this.radius < smallest)
+		const newSize = this.radius / 2;
+		if(newSize < ASTEROID_SIZE.small)
 			return [];
 		const debris = [
-			new Asteroid(this.pos.copy(), this.radius/2),
-			new Asteroid(this.pos.copy(), this.radius/2)
+			new Asteroid(this.pos.copy(), newSize),
+			new Asteroid(this.pos.copy(), newSize)
 		];
 		debris[0].vel.rotate(5); debris[0].heading += 5;
 		debris[1].vel.rotate(-5); debris[1].heading -= 5;

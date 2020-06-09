@@ -26,8 +26,11 @@ class Ship extends GameObject {
 
 	removeDeadBullets() {
 		for(let i = this.bullets.length - 1; i >= 0; i--)
-			if(!this.bullets[i].isAlive())
+			if(!this.bullets[i].isAlive()) {
+				const dead = this.bullets[i];
+				objects.splice(objects.indexOf(dead), 1);
 				this.bullets.splice(i, 1);
+			}
 	}
 
 	steer(angle) {
