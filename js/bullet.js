@@ -33,6 +33,7 @@ class Bullet extends GameObject {
 	display() {
 		if(this.life <= 0) return;
 		fill(255);
+		strokeWeight(1);
 		super.display();
 	}
 }

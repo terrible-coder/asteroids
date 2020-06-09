@@ -26,14 +26,14 @@ class GameObject {
 	}
 
 	wrap() {
-		if(this.pos.x > width)
-			this.pos.x = this.pos.x - width;
+		if(this.pos.x > LENGTH)
+			this.pos.x = this.pos.x - LENGTH;
 		else if(this.pos.x < 0)
-			this.pos.x = this.pos.x + width;
-		if(this.pos.y > height)
-			this.pos.y = this.pos.y - height;
+			this.pos.x = this.pos.x + LENGTH;
+		if(this.pos.y > LENGTH)
+			this.pos.y = this.pos.y - LENGTH;
 		else if(this.pos.y < 0)
-			this.pos.y = this.pos.y + height;
+			this.pos.y = this.pos.y + LENGTH;
 	}
 
 	handleCollision(other) {

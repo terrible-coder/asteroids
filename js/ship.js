@@ -54,6 +54,7 @@ class Ship extends GameObject {
 	display() {
 		this.bullets.forEach(b => b.display());
 		stroke(255);
+		strokeWeight(1);
 		noFill();
 		super.display();
 	}

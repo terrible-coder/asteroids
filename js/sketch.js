@@ -7,26 +7,28 @@ const ASTEROID_SIZE = {
 	medium: 16,
 	large: 32
 }
+let LENGTH;
 
 let ship;
 let leftButton;
-let smaller, larger;
+let SMALLER, LARGER;
+let mode;
 
 function spawnAsteroid() {
 	const side = random(["up", "down", "left", "right"]);
 	let pos;
 	switch(side) {
 	case "up":
-		pos = createVector(random(0, width), 0);
+		pos = createVector(random(0, LENGTH), 0);
 		break;
 	case "down":
-		pos = createVector(random(0, width), height);
+		pos = createVector(random(0, LENGTH), LENGTH);
 		break;
 	case "left":
-		pos = createVector(0, random(height));
+		pos = createVector(0, random(LENGTH));
 		break;
 	case "right":
-		pos = createVector(width, random(height));
+		pos = createVector(LENGTH, random(LENGTH));
 		break;
 	}
 	const sizeSelect = random(0, 4) | 0;
@@ -41,26 +43,29 @@ function spawnAsteroid() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	smaller = width > height? height: width;
-	larger = width > height? width: height;smaller
+	LENGTH = Math.min(width, height);
+	SMALLER = width > height? height: width;
+	LARGER = width > height? width: height;
+	if(width > height) mode = "landscape";
+	else mode = "portrait";
 	angleMode(DEGREES);
 	ellipseMode(RADIUS);
 	rectMode(CENTER);
-	ship = new Ship(width/2, height/2, 10);
+	ship = new Ship(LENGTH/2, LENGTH/2, 10);
 	for(let i = 0; i < 6; i++)
 		spawnAsteroid();
 	// left button
-	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {
+	new Button(createVector(0.125*width, 0.75*height), 0.06*SMALLER, 40, thisArg => {
 		thisArg.color = 160;
 		ship.steer(-5);
 	});
 	//right button
-	new Button(createVector(0.375*width, 0.75*height), 0.06*smaller, 40, thisArg => {
+	new Button(createVector(0.375*width, 0.75*height), 0.06*SMALLER, 40, thisArg => {
 		thisArg.color = 160;
 		ship.steer(5);
 	});
 	//up button
-	new Button(createVector(0.25*width, 0.625*height), 0.06*smaller, 40, thisArg => {
+	new Button(createVector(0.25*width, 0.625*height), 0.06*SMALLER, 40, thisArg => {
 		thisArg.color = 160;
 		const force = createVector(1, 0);
 		force.rotate(ship.heading);
@@ -68,7 +73,7 @@ function setup() {
 		ship.applyForce(force);
 	})
 	//down button
-	new Button(createVector(0.25*width, 0.875*height), 0.06*smaller, 40, thisArg => {
+	new Button(createVector(0.25*width, 0.875*height), 0.06*SMALLER, 40, thisArg => {
 		thisArg.color = 160;
 		const force = createVector(-1, 0);
 		force.rotate(ship.heading);
@@ -76,7 +81,7 @@ function setup() {
 		ship.applyForce(force);
 	})
 	// fire button
-	new Button(createVector(0.875*width, 0.75*height), 0.10*smaller, 60, thisArg => {
+	new Button(createVector(0.875*width, 0.75*height), 0.10*SMALLER, 60, thisArg => {
 		thisArg.color = color(236, 238, 71);
 		ship.fire();
 	});
@@ -86,10 +91,16 @@ function setup() {
 function draw() {
 	background(0);
 	const dt = deltaTime / 1000;
-	ship.update(dt);
-	asteroids.forEach(a => a.update(dt));
-	ship.display();
-	asteroids.forEach(a => a.display());
+	objects.forEach(a => a.update(dt));
+	push();
+	if(mode == "portrait") {}
+	else translate((width - LENGTH) / 2, 0);
+	noFill();
+	stroke(255);
+	strokeWeight(3);
+	rect(LENGTH/2, LENGTH/2, LENGTH, LENGTH);
+	objects.forEach(a => a.display());
+	pop();
 	buttons.forEach(b => b.display());
 	refresh();
 	detectCollisions();

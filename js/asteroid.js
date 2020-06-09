@@ -36,6 +36,7 @@ class Asteroid extends GameObject {
 	display() {
 		noFill();
 		stroke(255);
+		strokeWeight(1);
 		super.display();
 	}
 }
