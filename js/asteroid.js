@@ -26,10 +26,13 @@ class Asteroid extends GameObject {
 	split() {
 		if(this.radius < smallest)
 			return [];
-		return [
+		const debris = [
 			new Asteroid(this.pos.copy(), this.radius/2),
 			new Asteroid(this.pos.copy(), this.radius/2)
 		];
+		debris[0].vel.rotate(5); debris[0].heading += 5;
+		debris[1].vel.rotate(-5); debris[1].heading -= 5;
+		return debris;
 	}
 
 	display() {
