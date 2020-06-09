@@ -23,6 +23,15 @@ class Asteroid extends GameObject {
 		asteroids.push(this);
 	}
 
+	split() {
+		if(this.radius < smallest)
+			return [];
+		return [
+			new Asteroid(this.pos.copy(), this.radius/2),
+			new Asteroid(this.pos.copy(), this.radius/2)
+		];
+	}
+
 	display() {
 		noFill();
 		stroke(255);
