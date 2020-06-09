@@ -1,8 +1,8 @@
-const smallest = 2;
+const smallest = 4;
 const largest = 64;
 
-const ragged = 10;
-const smooth = 2;
+const ragged = 15;
+const smooth = 5;
 
 class Asteroid extends GameObject {
 	constructor(pos, size) {
