@@ -14,8 +14,25 @@ function setup() {
 	ellipseMode(RADIUS);
 	rectMode(CENTER);
 	ship = new Ship(width/2, height/2, 10);
-	for(let i = 0; i < 10; i++)
-		new Asteroid(createVector(random(0, width), random(0, height)), random(smallest, largest));
+	for(let i = 0; i < 10; i++) {
+		const side = random(["up", "down", "left", "right"]);
+		let pos;
+		switch(side) {
+			case "up":
+				pos = createVector(random(0, width), 0);
+				break;
+			case "down":
+				pos = createVector(random(0, width), height);
+				break;
+			case "left":
+				pos = createVector(0, random(height));
+				break;
+			case "right":
+				pos = createVector(width, random(height));
+				break;
+		}
+		new Asteroid(pos, random(smallest, largest));
+	}
 	// left button
 	new Button(createVector(0.125*width, 0.75*height), 0.06*smaller, 40, thisArg => {
 		thisArg.color = 160;
