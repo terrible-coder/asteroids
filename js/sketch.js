@@ -13,6 +13,7 @@ let ship;
 let leftButton;
 let SMALLER, LARGER;
 let mode;
+let score = 0;
 
 function spawnAsteroid() {
 	const side = random(["up", "down", "left", "right"]);
@@ -95,6 +96,10 @@ function draw() {
 	push();
 	if(mode == "portrait") {}
 	else translate((width - LENGTH) / 2, 0);
+	const scoreText = `score: ${score}`;
+	textSize(24);
+	fill(255);
+	text(scoreText, 50, 50);
 	noFill();
 	stroke(255);
 	strokeWeight(3);

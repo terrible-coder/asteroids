@@ -3,6 +3,17 @@ class Bullet extends GameObject {
 		super(pos, createVector(200, 0).rotate(dir), (thisArg, other) => {
 			if(!thisArg.isAlive()) return;
 			if(other instanceof Asteroid) {
+				switch(other.radius) {
+				case ASTEROID_SIZE.large:
+					score += 20;
+					break;
+				case ASTEROID_SIZE.medium:
+					score += 50;
+					break;
+				case ASTEROID_SIZE.small:
+					score += 100;
+					break;
+				}
 				const debris = other.split();
 				asteroids.splice(asteroids.indexOf(other), 1);
 				objects.splice(objects.indexOf(other), 1);
