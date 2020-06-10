@@ -109,7 +109,10 @@ function draw() {
 	buttons.forEach(b => b.display());
 	refresh();
 	detectCollisions();
-	if(asteroids.length < 4) spawnAsteroid();
+	if(asteroids.length < 4) {
+		for(let i = asteroids.length; i < 4; i++)
+			spawnAsteroid();
+	}
 }
 
 function refresh() {
